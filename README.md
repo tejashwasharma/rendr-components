@@ -1,5 +1,10 @@
 # rendr-components
 
+[![npm version](https://img.shields.io/npm/v/rendr-components.svg)](https://www.npmjs.com/package/rendr-components)
+
+**npm**: https://www.npmjs.com/package/rendr-components
+**Docs / Storybook**: https://rendr-components.web.app
+
 A universal React component library — **one codebase, renders on iOS, Android and the web**.
 Built on React Native primitives with `styled-components/native`, and on web through `react-native-web`.
 Every component reads its look from a single, fully overridable theme.
