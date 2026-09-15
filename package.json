@@ -1,0 +1,129 @@
+{
+  "name": "rendr-components",
+  "version": "0.1.0",
+  "description": "Universal (iOS, Android, web) React component library built on React Native primitives and styled-components, with a fully overridable theme.",
+  "license": "MIT",
+  "author": "Tejashwa Sharma",
+  "keywords": [
+    "react",
+    "react-native",
+    "react-native-web",
+    "styled-components",
+    "component-library",
+    "design-system",
+    "ui",
+    "typescript"
+  ],
+  "main": "./lib/commonjs/index.js",
+  "module": "./lib/module/index.js",
+  "types": "./lib/typescript/commonjs/index.d.ts",
+  "react-native": "./src/index.ts",
+  "source": "./src/index.ts",
+  "exports": {
+    ".": {
+      "react-native": "./src/index.ts",
+      "import": {
+        "types": "./lib/typescript/module/index.d.ts",
+        "default": "./lib/module/index.js"
+      },
+      "require": {
+        "types": "./lib/typescript/commonjs/index.d.ts",
+        "default": "./lib/commonjs/index.js"
+      },
+      "default": "./lib/module/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "src",
+    "lib",
+    "!**/*.test.*",
+    "!**/*.stories.*",
+    "!**/test-utils.*",
+    "!**/.*"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "storybook": "storybook dev -p 6006",
+    "storybook:build": "storybook build",
+    "example": "cd example && npx expo start",
+    "build": "bob build",
+    "clean": "rm -rf lib",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint \"src/**/*.{ts,tsx}\"",
+    "format": "prettier --write \"src/**/*.{ts,tsx}\" \"*.{js,json,md}\"",
+    "prepublishOnly": "npm run clean && npm run typecheck && npm run test && npm run build",
+    "deploy": "npm run storybook:build && firebase deploy --only hosting"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-native": ">=0.74.0",
+    "react-native-web": ">=0.19.0",
+    "styled-components": "^6.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react-native-web": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@babel/core": "^7.29.7",
+    "@monaco-editor/react": "^4.7.0",
+    "@react-native/babel-preset": "^0.87.1",
+    "@react-native/jest-preset": "^0.87.1",
+    "@storybook/react-vite": "^10.6.0",
+    "@testing-library/react-native": "^14.0.1",
+    "@types/jest": "^30.0.0",
+    "@types/react": "^19.3.0",
+    "eslint": "^9.39.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "firebase": "^12.19.0",
+    "inline-style-prefixer": "^7.0.1",
+    "jest": "^30.5.1",
+    "monaco-editor": "^0.56.0",
+    "prettier": "^3.9.6",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "react-live": "^4.1.8",
+    "react-native": "^0.87.1",
+    "react-native-builder-bob": "^0.43.1",
+    "react-native-web": "^0.21.2",
+    "storybook": "^10.6.0",
+    "styled-components": "^6.5.3",
+    "test-renderer": "^1.2.0",
+    "typescript": "5.9",
+    "typescript-eslint": "^8.70.0",
+    "vite": "^7.3.6",
+    "vite-plugin-react-native-web": "^3.2.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "react-native-builder-bob": {
+    "source": "src",
+    "output": "lib",
+    "exclude": "**/{__tests__,__fixtures__,__mocks__}/**,**/*.test.*,**/*.stories.*,**/test-utils.*",
+    "targets": [
+      [
+        "commonjs",
+        {
+          "esm": true
+        }
+      ],
+      [
+        "module",
+        {
+          "esm": true
+        }
+      ],
+      [
+        "typescript",
+        {
+          "project": "tsconfig.build.json"
+        }
+      ]
+    ]
+  }
+}

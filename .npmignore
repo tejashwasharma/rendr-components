@@ -1,0 +1,12 @@
+example/
+.storybook/
+storybook-static/
+coverage/
+*.test.*
+*.stories.*
+jest.config.js
+jest.setup.ts
+babel.config.js
+eslint.config.js
+tsconfig*.json
+.prettierrc

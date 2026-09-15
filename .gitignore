@@ -1,0 +1,14 @@
+.DS_Store
+.env
+.env.local
+.firebase/
+*.log
+coverage/
+example/.expo/
+example/android/
+example/ios/
+example/node_modules/
+firebase-debug.log
+lib/
+node_modules/
+storybook-static/
