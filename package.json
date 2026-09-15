@@ -1,6 +1,6 @@
 {
   "name": "rendr-components",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Universal (iOS, Android, web) React component library built on React Native primitives and styled-components, with a fully overridable theme.",
   "license": "MIT",
   "author": "Tejashwa Sharma",
