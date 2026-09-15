@@ -1,0 +1,22 @@
+name: Request review
+
+# Every PR needs @tejashwasharma's approval to merge (see CODEOWNERS +
+# branch protection). GitHub auto-requests a CODEOWNERS review, but it can
+# never request a review from the PR's own author (a platform rule) — so a
+# PR opened by the owner never gets an automatic reviewer badge from that
+# alone. This makes the request explicit for everyone else's PRs, so every
+# contributor sees "review requested" the moment they open one.
+on:
+  pull_request:
+    types: [opened, ready_for_review, reopened]
+
+jobs:
+  request-review:
+    if: github.event.pull_request.user.login != 'tejashwasharma'
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh pr edit "${{ github.event.pull_request.number }}" --add-reviewer tejashwasharma --repo "${{ github.repository }}"
