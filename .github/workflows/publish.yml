@@ -14,7 +14,7 @@ jobs:
     if: github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       id-token: write
     steps:
       - uses: actions/checkout@v4
@@ -49,6 +49,26 @@ jobs:
         run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      # Tag + GitHub Release so the version shows up on the repo page too,
+      # not just on npm. Tags the exact commit that was published.
+      - name: Tag release
+        if: steps.check.outputs.skip == 'false'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag "v${{ steps.check.outputs.local }}" "${{ github.event.workflow_run.head_sha }}"
+          git push origin "v${{ steps.check.outputs.local }}"
+
+      - name: Create GitHub Release
+        if: steps.check.outputs.skip == 'false'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "v${{ steps.check.outputs.local }}" \
+            --title "v${{ steps.check.outputs.local }}" \
+            --generate-notes \
+            --verify-tag
 
       - name: Skipped (version unchanged)
         if: steps.check.outputs.skip == 'true'
