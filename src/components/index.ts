@@ -28,3 +28,4 @@ export * from './Accordion';
 export * from './Toast';
 export * from './Table';
 export * from './Pagination';
+export * from './NavBar';
