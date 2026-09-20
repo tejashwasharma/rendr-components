@@ -50,7 +50,7 @@ describe('Surface', () => {
   it('renders the native blur component when one is provided', async () => {
     const Blur = ({ intensity, tint }: { intensity?: number; tint?: string }) => <RNText testID="blur">{`${tint}:${intensity}`}</RNText>;
     await renderWithTheme(<Surface />, { themeProps: { blurComponent: Blur } });
-    expect(screen.getByTestId('blur')).toHaveTextContent('light:60');
+    expect(screen.getByTestId('blur')).toHaveTextContent('light:7.5');
   });
 });
 

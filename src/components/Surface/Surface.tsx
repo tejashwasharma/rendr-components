@@ -82,7 +82,7 @@ export const Surface = forwardRefPolymorphic<typeof View, SurfaceOwnProps>((prop
   const semantic = glassProp === undefined || glassProp === enabled ? theme.colors.semantic : semanticFor(theme.mode, glassOn);
   const radius = resolveRadius(theme, rounded);
 
-  const fill =
+  const tintFill =
     variant === 'plain'
       ? semantic.transparent
       : pressed
@@ -94,6 +94,12 @@ export const Surface = forwardRefPolymorphic<typeof View, SurfaceOwnProps>((prop
             : variant === 'subtle'
               ? semantic.surfaceSubtle
               : semantic.surface;
+
+  // On web, CSS `backdrop-filter` alone gives the frosted look — a tint
+  // color on top of it muddies the effect, so glass surfaces stay fully
+  // transparent there. Native has no backdrop-filter equivalent without a
+  // `blurComponent`, so it keeps the tint as a fallback.
+  const fill = glassOn && Platform.OS === 'web' ? semantic.transparent : tintFill;
 
   const shadowName = shadow ?? (variant === 'sheet' ? 'md' : 'none');
 

@@ -346,7 +346,7 @@ export const easing = {
 export const glass = {
   enabled: true,
   /** Backdrop blur radius in px. */
-  blur: 24,
+  blur: 3,
   /** Web only: backdrop-filter saturate(). */
   saturate: 1.4,
   /** Draw the lit-edge rim on sheets. */
