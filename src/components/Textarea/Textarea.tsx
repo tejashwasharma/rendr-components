@@ -81,7 +81,7 @@ export const Textarea: React.ForwardRefExoticComponent<TextareaProps & React.Ref
         accessibilityLabelledBy={field?.id ? `${field.id}-label` : undefined}
         aria-invalid={invalid}
         aria-required={required}
-        aria-readonly={readOnly}
+        aria-readonly={readOnly || undefined}
         testID={testID}
         onFocus={(e) => {
           setFocused(true);
