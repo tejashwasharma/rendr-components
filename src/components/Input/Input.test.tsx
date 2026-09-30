@@ -22,6 +22,17 @@ describe('Input', () => {
     expect(screen.getByTestId('d').props.editable).toBe(false);
     expect(screen.getByTestId('r').props.editable).toBe(false);
   });
+  
+  it('omits aria-readonly entirely when not read-only, to avoid a react-native-web DOM bug', async () => {
+    await renderWithTheme(
+      <>
+        <Input testID="normal" />
+        <Input testID="ro" isReadOnly />
+      </>,
+    );
+    expect(screen.getByTestId('normal').props['aria-readonly']).toBeUndefined();
+    expect(screen.getByTestId('ro').props['aria-readonly']).toBe(true);
+  });
 
   it('shows a danger border when invalid', async () => {
     await renderWithTheme(<Input testID="i" isInvalid />);
@@ -43,6 +54,17 @@ describe('Input', () => {
 });
 
 describe('Textarea', () => {
+  it('omits aria-readonly entirely when not read-only, to avoid a react-native-web DOM bug', async () => {
+    await renderWithTheme(
+      <>
+        <Textarea testID="normal" />
+        <Textarea testID="ro" isReadOnly />
+      </>,
+    );
+    expect(screen.getByTestId('normal').props['aria-readonly']).toBeUndefined();
+    expect(screen.getByTestId('ro').props['aria-readonly']).toBe(true);
+  });
+
   it('renders multiline and grows with content', async () => {
     await renderWithTheme(<Textarea testID="t" minRows={2} maxRows={4} />);
     const el = screen.getByTestId('t');
